@@ -27,7 +27,7 @@ jobs:
           ruby-version: 3.1
 
       - name: Run Sorbet
-        run: auto/run-sorbet
+        run: srb tc
 
   require-strict-typing:
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
           ruby-version: 3.1
 
       - name: Run Require Strict Typing
-        run: auto/run-require-strict-typing
+        run: ./scripts/require-strict-typing
 
   quality:
     runs-on: ubuntu-latest
@@ -55,7 +55,7 @@ jobs:
           ruby-version: 3.1
 
       - name: Run Quality
-        run: auto/run-quality
+        run: rake quality
 
   rspec:
     runs-on: ubuntu-latest
@@ -76,7 +76,7 @@ jobs:
           if [[ "${{ matrix.ruby-version }}" < "3.0" ]]; then
             export BUNDLE_GEMFILE=/work/Gemfile-legacy
           fi
-          auto/run-specs
+          rspec
 
   jruby:
     runs-on: ubuntu-latest
@@ -97,4 +97,4 @@ jobs:
           if [[ "${{ matrix.jruby-version }}" < "9.4" ]]; then
             export BUNDLE_GEMFILE=/work/Gemfile-legacy
           fi
-          auto/run-specs
+          rspec
