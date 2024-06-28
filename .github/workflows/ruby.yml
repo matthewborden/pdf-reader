@@ -26,6 +26,11 @@ jobs:
         with:
           ruby-version: 3.1
 
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+
       - name: Run Sorbet
         run: srb tc
 
@@ -39,6 +44,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
 
       - name: Run Require Strict Typing
         run: ./scripts/require-strict-typing
@@ -54,14 +64,19 @@ jobs:
         with:
           ruby-version: 3.1
 
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+
       - name: Run Quality
-        run: bundle exec rake quality
+        run: rake quality
 
   rspec:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: [2.0.0-p648, 2.1.9, 2.2.10, 2.3.8, 2.4.10, 2.5.9, 2.6.10, 2.7.8, 3.0.7, 3.1.6, 3.2.4, 3.3.3]
+        ruby-version: [2.0.0-p648, 2.1.9, 2.2.10, 2.3.8, 2.4.10, 2.5.9, 2.6.10, 2.7.8, 3.0.7, 3.1.6, 3.2.4]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -70,6 +85,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
 
       - name: Run RSpec
         run: |
@@ -91,6 +111,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: jruby-${{ matrix.jruby-version }}
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
 
       - name: Run RSpec for JRuby
         run: |
