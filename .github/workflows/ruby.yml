@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: [2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 3.0, 3.1, 3.2, 3.3]
+        ruby-version: [2.0.0-p648, 2.1.9, 2.2.10, 2.3.8, 2.4.10, 2.5.9, 2.6.10, 2.7.8, 3.0.7, 3.1.6, 3.2.4, 3.3.3]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -90,7 +90,7 @@ jobs:
       - name: Setup JRuby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.jruby-version }}
+          ruby-version: jruby-${{ matrix.jruby-version }}
 
       - name: Run RSpec for JRuby
         run: |
